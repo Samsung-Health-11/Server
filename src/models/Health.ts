@@ -17,7 +17,10 @@ const HealthSchema = new mongoose.Schema({
     wakeTime: { type: Date, required: true },
   },
   weight: {
-    type: Number,
+    weight: { type: Number },
+    fatPercent: { type: Number },
+    muscle: { type: Number },
+    memo: { type: String }
   },
   water: {
     type: Number,
