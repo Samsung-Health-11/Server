@@ -17,15 +17,16 @@ const createWeight = async (req: Request, res: Response) => {
 
   if (!reqError.isEmpty()) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
 
-  const healthCreateDto: HealthCreateDTO = req.body;
+  const weightCreateDTO: WeightCreateDTO = req.body;
 
   try {
-    const data = await HealthService.createHealth(healthCreateDto);
+    await HealthService.createWeight(weightCreateDTO);
 
-    res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_WEIGHT_SUCCESS, data));
+    return res.status(sc.CREATED).send(success(sc.CREATED, rm.CREATE_WEIGHT_SUCCESS));
   } catch (error) {
     console.log(error);
-    res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+
+    return res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
   }
 };
 

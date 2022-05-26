@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import { BaseResponseDTO } from "../interfaces/base/baseDTO";
 import { WeightCreateDTO, HealthResponseDTO } from "../interfaces/health/healthDTO";
 import { HealthInfo } from "../interfaces/health/healthInfo";
 import Health from "../models/Health";
@@ -7,34 +6,9 @@ import Health from "../models/Health";
 /**
  * @체중_기록
  */
-const createHealth = async (healthCreateDto: HealthCreateDTO): Promise<BaseResponseDTO> => {
+const createWeight = async (weightCreateDTO: WeightCreateDTO) => {
   try {
-    const health = new Health({
-      step: {
-        count: 198,
-        target: 1900,
-        time: 2,
-        activity: 6,
-      },
-      calorie: {
-        intake: 0,
-        target: 1457,
-      },
-      sleep: {
-        sleepTime: "2022-05-31T02:20:00.000+00:00",
-        wakeTime: "2022-05-31T09:50:00.000+00:00",
-      },
-      weight: healthCreateDto.weight,
-      water: 0,
-    });
-
-    await health.save();
-
-    const data = {
-      _id: health._id,
-    };
-
-    return data;
+    await Health.updateOne({ weight: weightCreateDTO });
   } catch (error) {
     console.log(error);
     throw error;
@@ -130,7 +104,7 @@ const getAllHealth = async () => {
 };
 
 export default {
-  createHealth,
+  createWeight,
   getHealth,
   getAllHealth,
 };
