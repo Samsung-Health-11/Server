@@ -3,6 +3,10 @@ const message = {
   NOT_FOUND: "존재하지 않는 자원",
   BAD_REQUEST: "잘못된 요청",
   INTERNAL_SERVER_ERROR: "서버 내부 오류",
+
+  /* Health */
+  CREATED_HEALTH_SUCCESS: "체중 기록 성공",
+  READ_HEALTH_SUCCESS: "전체 건강 조회 성공"
 };
 
 export default message;
