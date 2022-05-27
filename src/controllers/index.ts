@@ -1,5 +1,3 @@
 import HealthController from "./HealthController";
 
-export {
-    HealthController,
-};
+export { HealthController };

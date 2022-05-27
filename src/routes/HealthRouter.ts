@@ -1,12 +1,12 @@
 import { Router } from "express";
+import { check } from "express-validator";
 import { HealthController } from "../controllers";
-import { body } from "express-validator/check";
 
 const router: Router = Router();
 
-router.get('/', HealthController.getHealth);
-router.post('/weight', [
-    body('weight.weight').notEmpty()
-], HealthController.createHealth);
+// router.get("/", HealthController.getHealth);
+router.get("/", HealthController.getAllHealth);
+router.post("/weight", [check("weight").notEmpty()], HealthController.createWeight);
+router.put("/water", [check("type").notEmpty()], HealthController.updateWater);
 
 export default router;
