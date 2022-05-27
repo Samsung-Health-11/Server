@@ -7,6 +7,7 @@ const message = {
   /* Health */
   CREATE_WEIGHT_SUCCESS: "체중 기록 성공",
   READ_HEALTH_SUCCESS: "전체 건강 조회 성공",
+  UPDATE_WATER_SUCCESS: "물 기록 수정 성공",
 };
 
 export default message;

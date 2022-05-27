@@ -19,3 +19,7 @@ export interface HealthResponseDTO {
   weight: number | null;
   water: number;
 }
+
+export interface WaterUpdateDTO {
+  type: string;
+}

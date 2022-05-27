@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { WeightCreateDTO, HealthResponseDTO } from "../interfaces/health/healthDTO";
+import { WeightCreateDTO, HealthResponseDTO, WaterUpdateDTO } from "../interfaces/health/healthDTO";
 import HealthService from "../services/HealthService";
 import { success, fail } from "../modules/util";
 import sc from "../modules/statusCode";
@@ -63,8 +63,34 @@ const getAllHealth = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * @route PUT /health/water
+ * @desc 마신 물을 기록합니다.
+ * @access Public
+ */
+const updateWater = async (req: Request, res: Response) => {
+  const reqError = validationResult(req);
+
+  if (!reqError.isEmpty()) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+
+  const waterUpdateDTO: WaterUpdateDTO = req.body;
+
+  try {
+    const data = await HealthService.updateWater(waterUpdateDTO);
+
+    if (data === null) return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+
+    return res.status(sc.OK).send(success(sc.OK, rm.UPDATE_WATER_SUCCESS));
+  } catch (error) {
+    console.log(error);
+
+    return res.status(sc.INTERNAL_SERVER_ERROR).send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
 export default {
   createWeight,
   getHealth,
   getAllHealth,
+  updateWater,
 };

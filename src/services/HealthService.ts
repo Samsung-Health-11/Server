@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { WeightCreateDTO, HealthResponseDTO } from "../interfaces/health/healthDTO";
+import { WeightCreateDTO, HealthResponseDTO, WaterUpdateDTO } from "../interfaces/health/healthDTO";
 import { HealthInfo } from "../interfaces/health/healthInfo";
 import Health from "../models/Health";
 
@@ -103,8 +103,30 @@ const getAllHealth = async () => {
   }
 };
 
+/**
+ * @마신_물_갱신
+ */
+const updateWater = async (waterUpdateDTO: WaterUpdateDTO) => {
+  try {
+    switch (waterUpdateDTO.type) {
+      case "+":
+        await Health.updateOne({ $inc: { water: 1 } });
+        break;
+      case "-":
+        await Health.updateOne({ $inc: { water: -1 } });
+        break;
+      default:
+        return null;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export default {
   createWeight,
   getHealth,
   getAllHealth,
+  updateWater,
 };
