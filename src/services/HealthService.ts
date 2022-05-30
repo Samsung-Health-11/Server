@@ -77,8 +77,8 @@ const getAllHealth = async () => {
     const sleepDate = dayjs(health.sleep.sleepTime);
     const wakeDate = dayjs(health.sleep.wakeTime);
     const sleepTime = wakeDate.diff(sleepDate, "minutes");
-    const sleepHour = sleepDate.hour() - 9;
-    const wakeHour = wakeDate.hour() - 9;
+    const sleepHour = sleepDate.hour();
+    const wakeHour = wakeDate.hour();
 
     const data: HealthResponseDTO = {
       step: { ...health.step, percent: Math.round(health.step.target / health.step.count) },
